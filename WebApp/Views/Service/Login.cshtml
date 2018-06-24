@@ -1,0 +1,38 @@
+﻿@model Entities.Service
+
+
+    <div class="container">
+
+        <div class="panel panel-default">
+
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true, "Login failed. Check your login details.");
+                <div>
+                    <fieldset>
+                        <legend>Please login</legend>
+                        <div class="editor-label">
+                            @Html.LabelFor(u => u.Login)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(u => u.Login)
+                            @Html.ValidationMessageFor(u => u.Login)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(u => u.Password)
+                        </div>
+                        <div class="editor-field">
+                            @Html.PasswordFor(u => u.Password)
+                            @Html.ValidationMessageFor(u => u.Password)
+                        </div>
+
+                        <input type="submit" value="Log In" />
+                    </fieldset>
+                </div>
+            }
+        </div>
+
+    </div>
+   

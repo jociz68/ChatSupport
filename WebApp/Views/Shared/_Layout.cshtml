@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Support</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Chat Support", "Customer", "Chat")</li>
+                <li>@Html.ActionLink("Service", "Support", "Service")</li>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign out", "Logout", "Service")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Sign in", "Login", "Service")</li>
+                }
+            </ul>
+            @if (Request.IsAuthenticated)
+            {
+                <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">@Html.Encode(User.Identity.Name)</a></p>
+            }
+           
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        @*<div class="row">
+            <div class="col-md-9 ">
+                <div style="width: auto; ">
+                    @Html.ActionLink("Chat", "Customer", "Chat")
+                    @Html.ActionLink("Service", "Support", "Support")
+
+                </div>
+            </div>
+            <div class="col-md-3 text-right">
+                @if (Request.IsAuthenticated)
+                {
+                    <strong>@Html.Encode(User.Identity.Name)</strong>
+                    @Html.ActionLink("Log Out", "Logout", "Service")
+                }
+                else
+                {
+                    @Html.ActionLink("Log In", "Login", "Service")
+                }
+            </div>
+        </div>*@
+
+        @RenderBody()
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿@model WebApp.Models.Complex
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @if (Request.IsAuthenticated)
+        {
+            <strong>@Html.Encode(User.Identity.Name)</strong>
+            @Html.ActionLink("Sign Out", "Logout", "Service")
+        }
+        else
+        {
+          
+            @Html.ActionLink("Sign In", "Login", "Service")
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Entities.Question>
+
+
+
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-4">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>Question</th>
+                    <th>Time</th>
+
+                </tr>
+            </thead>
+        </table>
+        <div class="chat-area" id="scrollList">
+            <table class="table table-hover" id="questionList">
+
+                @* Questions inserted by LoadData *@
+
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-6 current-chat">
+
+        <div class="row current-chat-area">
+            <div class="chat-container" id="CustomerQuestionContainer">
+                <p class='customer-color'>Selected customer's question</p>
+                <p id="CustomerQuestion"></p>
+            </div>
+        </div>
+
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row current-chat-footer">
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input type="hidden" id="QuestionId" name="QuestionId">
+                        <p>Enter your answer</p>
+                        <textarea name="Text" rows="5" class="form-control" id="Text" placeholder="Enter your answer"></textarea>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="sender">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var LoadedQuestion = [];
+    $(function () {
+        LoadData();
+        $("#sender").click(function () {
+
+            var answer = {};
+            answer.Text = $("#Text").val();
+            answer.QuestionId = $("#QuestionId").val();
+            if (answer.Text.trim() === "" || answer.QuestionId === "") {
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '/Service/AddAnswer',
+                data: addRequestVerificationToken(answer),
+
+                success: function () {
+                    LoadData();
+                    $("#Text").val("");
+                    $("#QuestionId").val("");
+                    $("#CustomerQuestion").empty();
+                },
+                error: function (ex) {
+                    alert("Error while inserting data: " + ex.responseText);
+                }
+            });
+            return false;
+        });
+    });
+
+
+
+    function RenderChat(item) {
+        var chat = "";
+
+        chat += "<tr>"
+
+            + "<td>"
+            + "<a nohref onClick='setQuestionId(" + item.Id + ")' style='cursor: pointer; color: blue; text - decoration: underline'>"
+            + SanitizeHtml(item.Text).substring(0, 20) + "..."
+            + "</a>"
+            + "</td>"
+            + "<td>"
+            + ToJavaScriptDate(item.CreateTime).toLocaleString()
+            + "</td>"
+            + "</tr>"
+        return chat
+    }
+
+    function setQuestionId(id) {
+        $("#QuestionId").val(id);
+        var foundQuestions = jQuery.grep(LoadedQuestion, function (question) {
+            return question.Id == id;
+        });
+
+        $("#CustomerQuestion").html(foundQuestions[0].Text);
+    }
+
+    function LoadData() {
+        var rows = "";
+        $.ajax({
+            type: 'POST',
+            url: '/Service/GetQuestion',
+            dataType: 'json',
+            data: { id: '' },
+            success: function (data) {
+                LoadedQuestion = data;
+                var items = '';
+                $.each(data, function (i, item) {
+                    rows += RenderChat(item)
+                });
+                $('#questionList').html(rows);
+                document.querySelector("#scrollList").scrollTop = 2000;
+            },
+            error: function (ex) {
+                alert("Error while loading data: " + ex.responseText);
+            }
+        });
+        return false;
+    }
+
+
+
+    function addRequestVerificationToken(data) {
+        data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+        return data;
+    };
+
+    function ToJavaScriptDate(value) {
+        var pattern = /Date\(([^)]+)\)/;
+        var results = pattern.exec(value);
+        return new Date(parseFloat(results[1]));
+    }
+
+    function SanitizeHtml(item) {
+        return $("<div>").text(item).html();
+    }
+
+    setInterval(LoadData, 5000);
+</script>
+
+
