@@ -18,7 +18,7 @@ namespace WebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Chat");
         }
 
         [HttpGet]
@@ -53,14 +53,12 @@ namespace WebApp.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-
             return RedirectToAction("Index", "Chat");
         }
 
 
         public ActionResult Support()
         {
-
             return View();
         }
 

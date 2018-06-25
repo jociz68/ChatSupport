@@ -1,38 +1,40 @@
 ﻿@model Entities.Service
 
 
-    <div class="container">
-
-        <div class="panel panel-default">
-
+<style>
+</style>
 
 
-            @using (Html.BeginForm())
-            {
-                @Html.ValidationSummary(true, "Login failed. Check your login details.");
-                <div>
-                    <fieldset>
-                        <legend>Please login</legend>
-                        <div class="editor-label">
-                            @Html.LabelFor(u => u.Login)
-                        </div>
-                        <div class="editor-field">
-                            @Html.TextBoxFor(u => u.Login)
-                            @Html.ValidationMessageFor(u => u.Login)
-                        </div>
-                        <div class="editor-label">
-                            @Html.LabelFor(u => u.Password)
-                        </div>
-                        <div class="editor-field">
-                            @Html.PasswordFor(u => u.Password)
-                            @Html.ValidationMessageFor(u => u.Password)
-                        </div>
+<div class="container">
 
-                        <input type="submit" value="Log In" />
-                    </fieldset>
+    @using (Html.BeginForm())
+    {
+
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4  text-center">
+                @Html.ValidationSummary(true, "Login failed. Check your login details.")
+                <h2 class="form-signin-heading">Please login</h2>
+                <div class="form-group">
+                    <div>
+                        <input type="text" class="form-control" id="Login" placeholder="Enter login name" name="Login">
+                    </div>
                 </div>
-            }
+                <div class="form-group">
+                    <div>
+                        <input type="password" class="form-control" id="Password" placeholder="Enter password" name="Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-    </div>
-   
+    }
+</div>
+
+

@@ -1,0 +1,14 @@
+To intall Chat web application, do the following installation steps:
+
+1) Load ChatSupport.sln solution in Visual Studio 2017 
+2) Publish WebApp project into a drop folder
+3) Move or copy the whole content of the drop folder to the storage space that IIS Service can access
+4) Start IIS Service Manager
+5) Add Website with IIS Service Manager
+6) Set the Site name to Chat
+7) Set the Physical path to the location where published WebApp has been copied to
+8) Set the Binding to https along with SSL certificate, IP address, host name correspondingly
+9) Set "ChatModel" connectionString in the Web.config of Chat WebApp to a MS SQL instance
+10) Set the Identity of Chat Application pool to an user account which has got adequate read-write SQL permission on MS SQL instance configured in Chat WepApp
+
+
