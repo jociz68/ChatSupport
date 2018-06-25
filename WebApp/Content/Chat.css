@@ -30,6 +30,11 @@
         border-top-right-radius: 0px;
     }
 
+.chat-area {
+    overflow: auto;
+    height: 60vh;
+    
+}
 
 .current-chat {
     /*height: 80vh;*/

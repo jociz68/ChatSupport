@@ -1,4 +1,4 @@
-To intall Chat web application, do the following installation steps:
+To install Chat web application, do the following installation steps:
 
 1) Load ChatSupport.sln solution in Visual Studio 2017 
 2) Publish WebApp project into a drop folder
@@ -11,4 +11,6 @@ To intall Chat web application, do the following installation steps:
 9) Set "ChatModel" connectionString in the Web.config of Chat WebApp to a MS SQL instance
 10) Set the Identity of Chat Application pool to an user account which has got adequate read-write SQL permission on MS SQL instance configured in Chat WepApp
 
-
+Authentication
+Customer may raise question without login. Company employees shall do login in order to answer the customers' questions.
+In the current version of the application, there is only one login user called 'admin' in the initial SQL database. The admin password is 'admin'.
