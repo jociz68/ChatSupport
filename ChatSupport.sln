@@ -5,11 +5,6 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{C12DCCFD-18CB-4356-80B8-72C2C81462F5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{7B4F1EC7-006E-465B-9BE2-F317653554FD}"
-	ProjectSection(SolutionItems) = preProject
-		CreateDb.sql = CreateDb.sql
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{33701450-1FBC-4726-AA04-0D400C1DD24E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{6D6180C9-2B3B-412C-B806-B69754E5306A}"
