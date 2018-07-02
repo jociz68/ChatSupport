@@ -115,7 +115,7 @@
             return question.Id == id;
         });
 
-        $("#CustomerQuestion").html(foundQuestions[0].Text);
+        $("#CustomerQuestion").html(SanitizeHtml(foundQuestions[0].Text));
     }
 
     function LoadData() {
